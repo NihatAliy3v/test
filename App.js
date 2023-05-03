@@ -1,5 +1,5 @@
-// State
-import { useEffect, useState } from "react";
+// Hook
+import { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -15,9 +15,7 @@ import TodoText from "./TodoText.jsx";
 export default function App() {
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
-  useEffect(() => {
-    console.log("kjfs");
-  }, []);
+
   const handleSave = () => {
     data.push(text);
     setData(data);
@@ -51,6 +49,7 @@ export default function App() {
 }
 
 const style = StyleSheet.create({
+  container: { flex: 1, paddingTop: 30 },
   title: { backgroundColor: "blue", padding: 10 },
   title_text: { color: "#fff", textAlign: "center", fontWeight: 700 },
   input: { backgroundColor: "#fff", flex: 1 },
@@ -60,7 +59,6 @@ const style = StyleSheet.create({
     borderRadius: 5,
     marginLeft: 10,
   },
-  container: { flex: 1, paddingTop: 30 },
   inputContainer: {
     backgroundColor: "#ccc",
     padding: 10,
