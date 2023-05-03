@@ -1,45 +1,52 @@
-import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+// State
+import { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
   TouchableOpacity,
-  Button,
+  SafeAreaView,
+  ScrollView,
 } from "react-native";
+// Components
 import TodoText from "./TodoText.jsx";
 
 export default function App() {
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
-
+  useEffect(() => {
+    console.log("kjfs");
+  }, []);
   const handleSave = () => {
     data.push(text);
     setData(data);
     setText("");
   };
+
   return (
-    <View style={{ flex: 1, paddingTop: 30 }}>
-      <View style={style.title}>
-        <Text style={style.title_text}>To-Do Application</Text>
-      </View>
-      <View
-        style={{ backgroundColor: "#ccc", padding: 10, flexDirection: "row" }}
-      >
-        <TextInput
-          value={text}
-          style={style.input}
-          onChangeText={(e) => setText(e)}
-        />
-        <TouchableOpacity onPress={handleSave} style={style.button}>
-          <Text>Ekle </Text>
-        </TouchableOpacity>
-      </View>
-      {data.map((item, index) => {
-        return <TodoText key={index} text={item} />;
-      })}
-    </View>
+    <SafeAreaView>
+      <ScrollView>
+        <View style={style.container}>
+          <View style={style.title}>
+            <Text style={style.title_text}>To-Do Application</Text>
+          </View>
+          <View style={style.inputContainer}>
+            <TextInput
+              value={text}
+              style={style.input}
+              onChangeText={(e) => setText(e)}
+            />
+            <TouchableOpacity onPress={handleSave} style={style.button}>
+              <Text>Add</Text>
+            </TouchableOpacity>
+          </View>
+          {data.map((item, index) => {
+            return <TodoText key={index} text={item} />;
+          })}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -53,6 +60,10 @@ const style = StyleSheet.create({
     borderRadius: 5,
     marginLeft: 10,
   },
+  container: { flex: 1, paddingTop: 30 },
+  inputContainer: {
+    backgroundColor: "#ccc",
+    padding: 10,
+    flexDirection: "row",
+  },
 });
-
-const styles = StyleSheet.create({});
